@@ -22,7 +22,7 @@ Template.search.events({
 
         console.log(sendObj);
         //to see if Product name is not empty
-        if (sendObj.keywords !=='') {
+        if (sendObj.keywords !==0) {
             //calling api and screen scrapping
             if ($('#ebay').is(':checked')) {
 
