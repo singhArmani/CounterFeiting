@@ -1,0 +1,68 @@
+<head>
+    <title>simple</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 style="text-align: center;font-family: Tahoma;color: orange;">Is Your Product Being Conterfieted?</h1>
+            </div>
+            <div class="col-xs-12">
+                <h2 style="text-align: center">TRY OUR SIMPLE SEARCH</h2>
+            </div>
+        </div>
+        {{> search}}
+        <h1 style="text-align: center;font-family: Tahoma;color:orange;">Search Result</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Portal</th>
+                    <th>Product Description</th>
+                    <th>Price</th>
+                    <th colspan="2">Report Item</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{> ebayResult}}
+                {{> alibabaResult}} 
+                {{> aliexpressResult}}
+            </tbody>
+        </table>
+    </div>
+</body>
+<template name="ebayResult">
+    {{#each getEbayResult}}
+    <tr>
+        <td>eBay</td>
+        <td><img src="{{productImageUrl}}" alt="ebayProductImage">{{productName}}</td>
+        <td>{{productPrice}}</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td><a href="{{productURL}}" target="_blank">More Info</a></td>
+    </tr>
+    {{/each}}
+</template>
+<template name="alibabaResult">
+    {{#each getAlibabaResult}}
+    <tr>
+        <td>alibaba</td>
+        <td>{{productName}}</td>
+        <td>{{productPrice}}</td>
+        <td>Yes</td>
+        <td>No</td>
+    </tr>
+    {{/each}}
+</template>
+<template name="aliexpressResult">
+    {{#each getAliexpressResult}}
+    <tr>
+        <td>aliexpress</td>
+        <td>{{productName}}</td>
+        <td>{{productPrice}}</td>
+        <td>Yes</td>
+        <td>No</td>
+    </tr>
+    {{/each}}
+</template>
