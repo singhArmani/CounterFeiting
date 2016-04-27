@@ -4,7 +4,7 @@ Meteor.startup(() => {
   // code to run on server at startup
 });
 
-
+//this is just a change I am making  
 //publication 
 Meteor.publish('theResultAliexpress', function(){
     return ResultAliexpress.find();
