@@ -11,6 +11,7 @@ Meteor.subscribe('theResultAlibaba');
 Meteor.subscribe('theResultEbay');
 
 Template.search.events({
+
     'click #submitbut': function(event) {
         event.preventDefault(); //to avoid refreshing behaviour
 
@@ -70,6 +71,26 @@ Template.ebayResult.helpers({
         return ResultEbay.find().fetch();
     }
 
+});
+
+Template.ebayResult.events({
+     'click .delete-todo': function(event){
+        event.preventDefault();
+        var documentId = this._id;
+        console.log(documentId);
+        //calling the server method and deleting the task 
+        var confirm = window.confirm("Remove this product?");
+        if(confirm){
+            Meteor.call('removeItemEbayById', documentId, function(error, res) {
+                    if (!error) {
+
+                        console.log("removed succesfully eBay");
+                    } else {
+                        console.log(error);
+                    }
+                });//removing item here
+        }
+    }
 });
 
 Template.alibabaResult.helpers({
