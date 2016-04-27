@@ -93,6 +93,46 @@ Template.ebayResult.events({
     }
 });
 
+Template.alibabaResult.events({
+     'click .delete-todo': function(event){
+        event.preventDefault();
+        var documentId = this._id;
+        console.log(documentId);
+        //calling the server method and deleting the task 
+        var confirm = window.confirm("Remove this product?");
+        if(confirm){
+            Meteor.call('removeItemAlibabaById', documentId, function(error, res) {
+                    if (!error) {
+
+                        console.log("removed succesfully Alibaba");
+                    } else {
+                        console.log(error);
+                    }
+                });//removing item here
+        }
+    }
+});
+
+Template.aliexpressResult.events({
+     'click .delete-todo': function(event){
+        event.preventDefault();
+        var documentId = this._id;
+        console.log(documentId);
+        //calling the server method and deleting the task 
+        var confirm = window.confirm("Remove this product?");
+        if(confirm){
+            Meteor.call('removeItemAliexpressById', documentId, function(error, res) {
+                    if (!error) {
+
+                        console.log("removed succesfully aliexpress");
+                    } else {
+                        console.log(error);
+                    }
+                });//removing item here
+        }
+    }
+});
+
 Template.alibabaResult.helpers({
     'getAlibabaResult': function() {
         return ResultAlibaba.find();

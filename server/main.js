@@ -29,8 +29,14 @@ Meteor.methods({
         ResultAliexpress.remove({});
         ResultAlibaba.remove({});
     },
-    removeItemEbayById:function(id){
-        ResultEbay.remove({_id:id}); //removing the item as per the id
+    removeItemEbayById: function(id) {
+        ResultEbay.remove({ _id: id }); //removing the item as per the id
+    },
+    removeItemAlibabaById: function(id) {
+        ResultAlibaba.remove({ _id: id }); //removing the item as per the id
+    },
+    removeItemAliexpressById: function(id) {
+        ResultAliexpress.remove({ _id: id }); //removing the item as per the id
     },
     'findProductByKeywordAliexpress': function(obj) {
 
@@ -71,6 +77,7 @@ Meteor.methods({
                 console.log(resObj);
 
                 //ResultAlibaba.remove({}); //removing old collections before insertin new one 
+
                 resObj.forEach(function(e) {
                     ResultAlibaba.insert(e);
                 });
@@ -82,7 +89,7 @@ Meteor.methods({
     'findProductByKeywordEbay': function(obj) {
         this.unblock();
 
-
+        var result;
         console.log("in server the object is " + obj);
         //preparing an ApI call here
         var url = "http://svcs.ebay.com/services/search/FindingService/v1";
@@ -101,7 +108,7 @@ Meteor.methods({
 
         //New code with callback 
         try {
-            var result = HTTP.get(url);
+              result = HTTP.get(url);
             //console.log("the resutl in try comes out to be: "+ result);
         } catch (error) {
             throw new Meteor.Error(error.getMessage());
