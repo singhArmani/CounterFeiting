@@ -1,5 +1,6 @@
 <head>
     <title>simple</title>
+
 </head>
 
 <body>
@@ -8,20 +9,27 @@
             <div class="col-xs-12">
                 <h1 style="text-align: center;font-family: Tahoma;color: orange;">Is Your Product Being Conterfieted?</h1>
             </div>
+
+            {{> loginButtons}}
             <div class="col-xs-12">
                 <h2 style="text-align: center">TRY OUR SIMPLE SEARCH</h2>
             </div>
         </div>
         {{> search}}
-        <h1 style="text-align: center;font-family: Tahoma;color:orange;">Search Result</h1>
+
+        {{> export}}
+
+        <h1 style="text-align: center;font-family: Tahoma;color:orange;display:inline; margin-left:40%">Search Result</h1>
+        {{> selectAll}}
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Portal</th>
                     <th>Product Description</th>
                     <th>Price</th>
-                    <th colspan="2">Report Item</th>
+                    <th>Remove</th>
                     <th>Link</th>
+                    <th>Report</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,34 +43,61 @@
 <template name="ebayResult">
     {{#each getEbayResult}}
     <tr>
-        <td>eBay</td>
+        <td>{{productPortal}}</td>
         <td><img src="{{productImageUrl}}" alt="ebayProductImage">{{productName}}</td>
         <td>{{productPrice}}</td>
         <td><a href="#" class="delete-todo">Remove</a></td>
-        
-        <td><a href="{{productURL}}" target="_blank">More Info</a></td>
+        <td><a href="{{productURL}}" id="productLink" target="_blank">More Info</a></td>
+        <td><input type="checkbox" id="report" {{checked}}></td>
+        <td><button class="btn btn-default" data-clipboard-text="{{productURL}}">
+            <span class="glyphicon glyphicon-scissors"></span>
+        </button></td>
     </tr>
     {{/each}}
 </template>
+
+
 <template name="alibabaResult">
     {{#each getAlibabaResult}}
     <tr>
-        <td>alibaba</td>
-        <td>{{productName}}</td>
+        <td>{{productPortal}}</td>
+        <td><img src="{{productImageUrl}}" alt="aliexpressProductImage">{{productName}}</td>
         <td>{{productPrice}}</td>
         <td><a href="#" class="delete-todo">Remove</a></td>
-
+        <td><a href="{{productURL}}" id="productLink" target="_blank">More Info</a></td>
+        <td><input type="checkbox" id="report" {{checked}}></td>
+        <td><button class="btn btn-default" data-clipboard-text="https:{{productURL}}">
+            <span class="glyphicon glyphicon-scissors"></span>
+        </button></td>
     </tr>
     {{/each}}
 </template>
 <template name="aliexpressResult">
     {{#each getAliexpressResult}}
     <tr>
-        <td>aliexpress</td>
-        <td>{{productName}}</td>
+        <td>{{productPortal}}</td>
+        <td><img src="{{productImageUrl}}" alt="aliexpressProductImage" width="140" height="140">{{productName}}</td>
         <td>{{productPrice}}</td>
         <td><a href="#" class="delete-todo">Remove</a></td>
-   
+        <td><a href="{{productURL}}" target="_blank">More Info</a></td>
+        <td><input type="checkbox" id="report" {{checked}}></td>
+        <td><button class="btn btn-default" data-clipboard-text="http:{{productURL}}">
+            <span class="glyphicon glyphicon-scissors"></span>
+        </button></td>
     </tr>
     {{/each}}
+</template>
+
+
+<template name="export">
+    <div style="margin-top: 10px">
+    <a href="#" class="btn btn-primary" role="button" id="download"><span class="glyphicon glyphicon-save"></span>&nbsp;Download CSV</a>
+        </div>
+</template>
+
+<template name="selectAll">
+    <div class="checkbox" style="float:right">
+        <label>
+            <input type="checkbox" id="selectAll">Select All</label>
+    </div>
 </template>

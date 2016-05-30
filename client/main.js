@@ -31,50 +31,51 @@ Template.search.events({
 
     'click #submitbut': function(event) {
         event.preventDefault(); //to avoid refreshing behaviour
-
-        Meteor.call('RemoveAllResult');//removing all result before making and inserting new resul
+        var currentUser = Meteor.userId();
+        Meteor.call('RemoveAllResult',currentUser);//removing all result before making and inserting new resul
 
         var sendObj = { keywords: $('#productName').val(), maxprice: $('#maxprice').val() };
 
+        if(Meteor.userId()) {
+            if (sendObj.keywords !== 0) {
+                //calling api and screen scrapping
+                if ($('#ebay').is(':checked')) {
+
+                    Meteor.call('findProductByKeywordEbay', sendObj, function (error, res) {
+                        if (!error) {
+
+                            console.log("result succesfully stored for eBay");
+                        } else {
+                            console.log(error);
+                        }
+                    });
+                }
+                if ($('#alibaba').is(':checked')) {
+                    Meteor.call('findProductByKeywordAlibaba', sendObj, function (error, res) {
+                        if (!error) {
+
+                            console.log("result succesfully stored for alibaba");
+                        } else {
+                            console.log(error);
+                        }
+                    });
+                }
+                if ($('#aliexpress').is(':checked')) {
+                    Meteor.call('findProductByKeywordAliexpress', sendObj, function (error, res) {
+                        if (!error) {
+
+                            console.log("result succesfully stored for Aliexpress ");
+                        } else {
+                            console.log(error);
+                        }
+                    });
+                }
 
 
-        console.log(sendObj);
-        //to see if Product name is not empty
-        if (sendObj.keywords !==0) {
-            //calling api and screen scrapping
-            if ($('#ebay').is(':checked')) {
-
-                Meteor.call('findProductByKeywordEbay', sendObj, function(error, res) {
-                    if (!error) {
-
-                        console.log("result succesfully stored for eBay");
-                    } else {
-                        console.log(error);
-                    }
-                });
             }
-            if ($('#alibaba').is(':checked')) {
-                Meteor.call('findProductByKeywordAlibaba', sendObj, function(error, res) {
-                    if (!error) {
-
-                        console.log("result succesfully stored for alibaba");
-                    } else {
-                        console.log(error);
-                    }
-                });
-            }
-            if ($('#aliexpress').is(':checked')) {
-                Meteor.call('findProductByKeywordAliexpress', sendObj, function(error, res) {
-                    if (!error) {
-
-                        console.log("result succesfully stored for Aliexpress ");
-                    } else {
-                        console.log(error);
-                    }
-                });
-            }
-
-
+        }
+        else {
+            console.log("can't do search as user is not logged in!");
         }
 
     }
@@ -301,6 +302,11 @@ Template.selectAll.events({
     }
 });
 
+
 Accounts.ui.config({
     passwordSignupFields: "USERNAME_AND_OPTIONAL_EMAIL"
 });
+
+(function(){
+    new Clipboard('.btn');
+})();
