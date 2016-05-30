@@ -1,0 +1,36 @@
+<template name="search">
+    <div class="row">
+        <div class="col-xs-12">
+            Product Name:
+            <div class="form-group">
+                <input type="text" class="form-control" name="productName" placeholder="Product name" id="productName">
+            </div>
+            <br>
+            <br> Threshold Price:
+            <div class="form-group">
+                <input type="text" class="form-control" name="thresholdPrice" placeholder="thresholdPrice" id="maxprice">
+                <br>
+            </div>
+            <div style="float:left">
+            <p class="text-muted">Filter your search by marketplace</p>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="ebay">Ebay</label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="alibaba">Alibaba</label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="aliexpress">Aliexpress</label>
+            </div>
+            <button type="submit" id="submitbut" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Preview</button>
+            </div>
+            <div style="float:right;width:76%">
+                <p class="text-muted">Paste your product links here</p>
+                <textarea class="form-control" rows="7" placeholder="Paste your links here..."></textarea>
+            </div>
+        </div>
+    </div>
+</template>
